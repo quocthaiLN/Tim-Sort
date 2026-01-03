@@ -1,0 +1,4 @@
+*.exe
+.vscode/
+data/adaptiveness/*.txt
+data/performance/*.txt
