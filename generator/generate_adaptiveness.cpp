@@ -58,7 +58,6 @@ void genAvg()
 }
 
 // Worst Case: Mảng xen kẽ
-// Worst Case: Mảng xen kẽ
 void genWorst()
 {
     vector<int> data(N);
