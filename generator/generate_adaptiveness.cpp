@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int N = 10000;
+const int N = 100000;
 
 const string BASE_PATH = "data/adaptiveness/";
 const string PATH_BEST = "best_case.txt";

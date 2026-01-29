@@ -13,64 +13,58 @@ const string FILE_BEST = "best_case.txt";
 const string FILE_AVG = "avg_case.txt";
 const string FILE_WORST = "worst_case.txt";
 
-// Hàm load dữ liệu từ file
-bool loadData(const string &fileName, vector<int> &data, int &n)
+// Hàm load dữ liệu
+vector<int> loadData(const string &fileName)
 {
-    string fullPath = FOLDER_PATH + fileName;
-    ifstream inFile(fullPath);
-
-    if (!inFile.is_open())
-    {
-        cerr << "[Error]: Can not open file " << fullPath << endl;
-        return false;
-    }
-
+    ifstream inFile(fileName);
+    int n;
     inFile >> n;
-    data.resize(n);
+    vector<int> data(n);
     for (int i = 0; i < n; ++i)
-    {
         inFile >> data[i];
-    }
-    inFile.close();
-    return true;
+    return data;
 }
 
-// Hàm benchmark
-void benchmark(const string &caseName, const string &fileName)
+// Hàm đo thời gian trả về mili giây
+double measure(vector<int> &data)
 {
-
-    vector<int> data;
-    int n;
-    if (!loadData(fileName, data, n))
-        return;
-
-    cout << "Testing " << caseName << " (N=" << n << ")..." << flush;
-
+    int n = data.size();
     auto start = high_resolution_clock::now();
 
-    timSort(data, n);
+    timSort(data, n); // Chạy thuật toán
 
     auto stop = high_resolution_clock::now();
-
     auto duration = duration_cast<microseconds>(stop - start);
-    double ms = duration.count() / 1000.0;
-
-    cout << "\r";
-    cout << left << setw(15) << caseName
-         << "| Time: " << fixed << setprecision(3) << setw(8) << ms << " ms "
-         << "| File: " << fileName << endl;
+    return duration.count() / 1000.0;
 }
 
 int main()
 {
-    cout << "================ TIMSORT BENCHMARK ================" << endl;
-    cout << "Unit: milisecond (ms)\n"
-         << endl;
+    cout << "=================== RESULT TABLE (Unit: ms) ===================" << endl;
+    cout << left
+         << " | " << setw(12) << "Best Case"
+         << " | " << setw(12) << "Avg Case"
+         << " | " << setw(12) << "Worst Case" << endl;
+    cout << "---------------------------------------------------------------" << endl;
 
-    benchmark("BEST CASE", FILE_BEST);
-    benchmark("AVERAGE CASE", FILE_AVG);
-    benchmark("WORST CASE", FILE_WORST);
+    // Xây dựng tên file tương ứng với N
+    string fBest = FOLDER_PATH + "best_case.txt";
+    string fAvg = FOLDER_PATH + "avg_case.txt";
+    string fWorst = FOLDER_PATH + "worst_case.txt";
 
-    cout << "==================================================================" << endl;
+    // Đo Best, Avg, Worst Case
+    vector<int> dBest = loadData(fBest);
+    double tBest = measure(dBest);
+
+    vector<int> dAvg = loadData(fAvg);
+    double tAvg = measure(dAvg);
+
+    vector<int> dWorst = loadData(fWorst);
+    double tWorst = measure(dWorst);
+
+    cout << left
+         << " | " << setw(12) << tBest
+         << " | " << setw(12) << tAvg
+         << " | " << setw(12) << tWorst << endl;
     return 0;
 }

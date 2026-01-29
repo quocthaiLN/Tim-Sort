@@ -7,7 +7,6 @@
 ```
 g++ src/timSort.cpp tests/correctness/correctness.cpp -o correctness_tests.exe
 ./correctness_tests.exe
-
 ```
 
 # ADAPTIVENESS
