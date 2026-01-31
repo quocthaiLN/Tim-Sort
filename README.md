@@ -12,11 +12,11 @@ g++ src/timSort.cpp tests/correctness/correctness.cpp -o correctness_tests.exe
 # ADAPTIVENESS
 
 ## Generate data
+
 ```
 g++ src/timSort.cpp generator/generate_adaptiveness.cpp -o generate_adaptiveness.exe
 ./generate_adaptiveness.exe
 ```
-
 
 ## Build & Run
 
@@ -39,4 +39,20 @@ g++ src/timSort.cpp generator/generate_performance.cpp -o generate_performance.e
 ```
 g++ src/timSort.cpp tests/performance/performance.cpp -o performance_tests.exe
 ./performance_tests.exe
+```
+
+# COMPARE
+
+## Generate data
+
+```
+g++ src/timSort.cpp generator/generate_compare.cpp -o generate_compare.exe
+./generate_compare.exe
+```
+
+# Build & Run
+
+```
+g++ src/*.cpp tests/compare/compare.cpp -o compare_tests.exe
+./compare_tests.exe
 ```

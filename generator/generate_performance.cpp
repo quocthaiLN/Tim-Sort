@@ -1,9 +1,3 @@
-/**
- * File: tests/performance/generator.cpp
- * Mục đích: Sinh 10 bộ dữ liệu tăng dần theo cấp số nhân.
- * Start: 10,000 -> End: ~5,120,000
- */
-
 #include <iostream>
 #include <vector>
 #include <fstream>
